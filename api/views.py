@@ -14,24 +14,29 @@ def getRoutes(request):
 # create and get notes
 @api_view(["POST","GET"])
 def mainRoute(request):
-    
-    # create new note
     if request.method == "POST":
-        data = request.data
-        note = Note.objects.create(body=data["note"])
-        serializer = NoteSerializer(note,many=False)
-        return Response(serializer.data)
-    
-    # get all notes
+        return createNote(request)
     else:  
-        notes = Note.objects.all().order_by("-updated")
-        serializer = NoteSerializer(notes,many=True)
-        return Response(serializer.data)
+        return getNotes(request)
     
+# create a note
+def createNote(request):
+    data = request.data
+    note = Note.objects.create(body=data["note"])
+    serializer = NoteSerializer(note,many=False)
+    return Response(serializer.data)
+
+
+# get all notes
+def getNotes(request):
+    notes = Note.objects.all().order_by("-updated")
+    serializer = NoteSerializer(notes,many=True)
+    return Response(serializer.data)
+
 
 
 @api_view(["GET","PUT","DELETE"])
-def handleRoute(request,pk):
+def noteDetails(request,pk):
     
     # get single note 
     if request.method == "GET":
