@@ -11,6 +11,15 @@ from .serializers import NoteSerializer
 def getRoutes(request):
     return Response("Our API")
 
+# create a note
+@api_view(["POST"])
+def createNote(request):
+    data = request.data
+    note = Note.objects.create(body=data["note"])
+    serializer = NoteSerializer(note,many=False)
+    return Response(serializer.data)
+
+
 # get notes form the database
 @api_view(["GET"])
 @permission_classes([AllowAny])
@@ -36,8 +45,6 @@ def updateNote(request,pk):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
-
-    
 
 
 # delete note
