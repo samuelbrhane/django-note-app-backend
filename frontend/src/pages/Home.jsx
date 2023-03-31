@@ -18,9 +18,7 @@ const Home = () => {
   // handle delete note
   const handleDelete = async (id) => {
     setNotes(notes.filter((note) => note.id !== id));
-    await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}/api/notes/delete/${id}/`
-    );
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/notes/${id}/`);
   };
 
   // fetch data at first render

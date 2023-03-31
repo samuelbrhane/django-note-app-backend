@@ -19,10 +19,9 @@ const Note = () => {
   // handle note update
   const handleEdit = async (e) => {
     e.preventDefault();
-    await axios.put(
-      `${import.meta.env.VITE_BACKEND_URL}/api/notes/update/${id}/`,
-      { body: noteData }
-    );
+    await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/notes/${id}/`, {
+      body: noteData,
+    });
     navigate("/");
   };
 

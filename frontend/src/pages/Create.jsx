@@ -7,9 +7,8 @@ const Create = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("note", note);
     const { data } = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/notes/create/`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/notes/`,
       { note }
     );
     console.log("data: " + JSON.stringify(data));
