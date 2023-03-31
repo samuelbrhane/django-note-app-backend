@@ -9,7 +9,7 @@ from .serializers import NoteSerializer
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def getRoutes(request):
-    return Response("Our API")
+    return Response("Welcome to Notes api.")
 
 # create a note
 @api_view(["POST"])
